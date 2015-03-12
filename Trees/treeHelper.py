@@ -41,14 +41,20 @@ class Tree():
         self.postOrder(node.left)
         self.postOrder(node.right)
         print(node.data)
-                
-def main():
-    tree=Tree()
-    tree.setRoot(tree.createNode(1))
-    tree.root.left=tree.createNode(2)
-    tree.root.right=tree.createNode(3)
-    tree.inOrder(tree.root)
-    tree.preOrder(tree.root)
-    tree.postOrder(tree.root)
+        
+    def rootToLeafUtility(self, node, pathList):
+        if node==None:
+            return
+        self.path=pathList
+        self.path.append(node.data)
+        if node.left==None and node.right==None:
+            print(pathList)
+        else:
+            self.rootToLeafUtility(node.left, self.path)
+            self.rootToLeafUtility(node.right, self.path)
+            
+        
+    def rootToLeafPaths(self,node):
+        self.pathList=[]
+        self.rootToLeafUtility(node,self.pathList)
     
-if __name__=="__main__": main()
